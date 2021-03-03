@@ -40,7 +40,32 @@ import { environment as env } from '../environments/environment';
     FontAwesomeModule,
     AuthModule.forRoot({
       domain: 'dev-t26qk6oz.us.auth0.com',
-      clientId: 'HKJAjZHRypnYgFXKlzalEJwcTh29Kari'
+      clientId: 'HKJAjZHRypnYgFXKlzalEJwcTh29Kari',
+
+  // Request this audience at user authentication time
+    audience: 'http://localhost:3001',
+
+  // Request this scope at user authentication time
+    scope: 'read:current_user',
+
+  // Specify configuration for the interceptor              
+    httpInterceptor: {
+      allowedList: [
+      
+      {
+        // Match any request that starts 'https://dev-t26qk6oz.us.auth0.com/api/v2/' (note the asterisk)
+        uri: 'http://localhost:3001/*',
+        tokenOptions: {
+        //   The attached token should target this audience
+        audience: 'http://localhost:3001',
+
+          // The attached token should have these scopes
+          scope: 'read:current_user'
+        }
+        
+      }
+    ]
+  }
     }),
   ],
   providers: [

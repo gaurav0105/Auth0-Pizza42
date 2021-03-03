@@ -11,7 +11,7 @@ const app = express();
 if (!authConfig.domain || !authConfig.audience) {
   throw 'Please make sure that auth_config.json is in place and populated';
 }
-
+console.log('test log');
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(
@@ -28,15 +28,16 @@ const checkJwt = jwt({
     jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`,
   }),
 
-  audience: authConfig.audience,
+  audience: 'http://localhost:3001',
   issuer: `https://${authConfig.domain}/`,
   algorithms: ['RS256'],
+  
 });
 
 app.get('/api/external', checkJwt, (req, res) => {
   res.send({
     msg: 'Your access token was successfully validated!',
-  });
+   });
 });
 
 const port = process.env.API_SERVER_PORT || 3001;
