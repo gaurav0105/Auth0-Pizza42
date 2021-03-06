@@ -25,8 +25,12 @@
             <a routerLink="/" class="nav-link">Home</a>
           </li>
           <li class="nav-item" *ngIf="auth.isAuthenticated$ | async">
-            <a routerLink="external-api" class="nav-link">External API</a>
+            <a routerLink="external-api" class="nav-link">Order Pizza Here - Authenticated User</a>
           </li>
+          <li class="nav-item" *ngIf="(auth.isAuthenticated$ | async) === false">
+            <a routerLink="external-api" class="nav-link">Order Pizza Here - Not Authenticated User</a>
+          </li>
+
         </ul>
 
         <ul class="navbar-nav d-none d-md-block">
@@ -42,6 +46,7 @@
             >
               Log in
             </button>
+            
           </li>
           <!-- / Login button -->
 
@@ -68,7 +73,7 @@
             <div class="dropdown-menu dropdown-menu-left" ngbDropdownMenu>
               <!-- Show the user's full name from the id token here -->
               <div class="dropdown-header">
-                {{ user.name }}
+                {{ user.email }}
               </div>
               <a routerLink="/profile" class="dropdown-item dropdown-profile">
                 <fa-icon [icon]="faUser" class="mr-3"></fa-icon> Profile
@@ -116,7 +121,7 @@
                 [src]="user.picture"
               />
               <!-- Show the user's full name from the id token here -->
-              <h6 class="d-inline-block">{{ user.name }}</h6>
+              <h6 class="d-inline-block">{{ user.email_verified }}</h6>
             </span>
           </li>
           <li>

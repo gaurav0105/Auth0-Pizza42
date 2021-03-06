@@ -38,20 +38,22 @@ import { environment as env } from '../environments/environment';
     NgbModule,
     HighlightModule,
     FontAwesomeModule,
+    
     AuthModule.forRoot({
       domain: 'dev-t26qk6oz.us.auth0.com',
       clientId: 'HKJAjZHRypnYgFXKlzalEJwcTh29Kari',
 
   // Request this audience at user authentication time
-    audience: 'http://localhost:3001',
+  audience: 'https://dev-t26qk6oz.us.auth0.com/api/v2/',  
+  //audience: 'http://localhost:3001',
 
   // Request this scope at user authentication time
-    scope: 'read:current_user',
+  //scope: 'update:users',
+  scope: 'read:current_user',
 
   // Specify configuration for the interceptor              
     httpInterceptor: {
       allowedList: [
-      
       {
         // Match any request that starts 'https://dev-t26qk6oz.us.auth0.com/api/v2/' (note the asterisk)
         uri: 'http://localhost:3001/*',
@@ -60,11 +62,18 @@ import { environment as env } from '../environments/environment';
         audience: 'http://localhost:3001',
 
           // The attached token should have these scopes
-          scope: 'read:current_user'
+        //scope: 'update:users'
+        //scope: 'pizza:yes'
         }
-        
-      }
-    ]
+      },
+      {
+        uri: 'https://dev-t26qk6oz.us.auth0.com/api/v2*',
+        tokenOptions: {
+        audience:'https://dev-t26qk6oz.us.auth0.com/api/v2/',
+        scope: 'read:current_user',
+        }
+      },
+    ] 
   }
     }),
   ],

@@ -8,12 +8,13 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class ProfileComponent implements OnInit {
   profileJson: string = null;
-
+  isEmailVerified = null;
   constructor(public auth: AuthService) {}
 
   ngOnInit() {
     this.auth.user$.subscribe(
       (profile) => (this.profileJson = JSON.stringify(profile, null, 2))
     );
+    this.isEmailVerified = this.profileJson;
   }
 }

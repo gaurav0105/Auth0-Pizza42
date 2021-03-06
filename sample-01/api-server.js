@@ -5,13 +5,14 @@ const cors = require('cors');
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const authConfig = require('./auth_config.json');
+const jwtAuthz = require('express-jwt-authz');
 
 const app = express();
 
 if (!authConfig.domain || !authConfig.audience) {
   throw 'Please make sure that auth_config.json is in place and populated';
 }
-console.log('test log');
+
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(
@@ -28,16 +29,20 @@ const checkJwt = jwt({
     jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`,
   }),
 
+  //scope: 'pizza:yes',
   audience: 'http://localhost:3001',
   issuer: `https://${authConfig.domain}/`,
   algorithms: ['RS256'],
   
 });
 
-app.get('/api/external', checkJwt, (req, res) => {
+//const checkScopes = jwtAuthz([ 'pizza:yes' ]);
+
+app.get('/api/orderPizza', checkJwt, (req, res) => {
   res.send({
-    msg: 'Your access token was successfully validated!',
+    msg: 'Your Pizza order has been accepted!',
    });
+   console.log('Order placed')
 });
 
 const port = process.env.API_SERVER_PORT || 3001;

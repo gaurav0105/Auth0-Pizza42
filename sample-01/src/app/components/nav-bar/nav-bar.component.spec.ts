@@ -9,8 +9,8 @@ describe('NavBarComponent', () => {
   let authServiceSpy: jasmine.SpyObj<AuthService>;
 
   beforeEach(() => {
-    authServiceSpy = jasmine.createSpyObj('AuthService', ['loginWithRedirect']);
-
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['loginWithRedirect'], ['isEMailVerified']);
+    
     TestBed.configureTestingModule({
       declarations: [NavBarComponent],
       providers: [{ provide: AuthService, useValue: authServiceSpy }],
