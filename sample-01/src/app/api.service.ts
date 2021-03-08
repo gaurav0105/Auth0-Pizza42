@@ -10,7 +10,10 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 export class ApiService {
   constructor(private http: HttpClient) {}
   payload: any;
-   
+  date: Date;
+  strDate: string;
+  strPayload: string;
+
   ping$(): Observable<any> {
     console.log('inside app.service.ts');
     console.log(config.apiUri);
@@ -18,7 +21,13 @@ export class ApiService {
   }
 
   updateMetadata$(): Observable<any> {
-    this.payload = JSON.parse('{"user_metadata": {"Pizza Ordered":"XXL"}}');
+    this.date = new Date();
+    this.strDate = this.date.toISOString().slice(0,19);
+    //this.strPayload =  '{"user_metadata": {"Pizza Ordered:"'+':"'+this.strDate+'XXL"}}';
+    this.strPayload =  '{"user_metadata": {"Pizza Ordered on '+this.strDate+'":'+'"XXL"}}';
+    //this.strPayload =  '{"user_metadata": {"Pizza Ordered":"XXL"}}';
+    this.payload = JSON.parse(this.strPayload);
+    //this.payload = JSON.parse('{"user_metadata": {"Pizza Ordered":"XXL"}}');
     return this.http.patch(`https://dev-t26qk6oz.us.auth0.com/api/v2/users/auth0|603dcbce2a7542006aadcb07`, this.payload);
   }
 
