@@ -36,9 +36,9 @@ const checkJwt = jwt({
   
 });
 
-//const checkScopes = jwtAuthz([ 'pizza:yes' ]);
+const checkScopes = jwtAuthz([ 'pizza:yes' ]);
 
-app.get('/api/orderPizza', checkJwt, (req, res) => {
+app.get('/api/orderPizza', checkJwt, checkScopes, (req, res) => {
   res.send({
     msg: 'Your Pizza order has been accepted!',
    });

@@ -50,6 +50,7 @@
     "@angular/cli": "^11.1.2",
     "@angular/compiler-cli": "^11.1.1",
     "@angular/language-service": "^11.1.1",
+    "@jefiozie/ngx-aws-deploy": "^3.0.1",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "^2.0.8",

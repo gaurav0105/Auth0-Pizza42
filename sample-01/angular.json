@@ -106,6 +106,9 @@
               "devServerTarget": "login-demo:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@jefiozie/ngx-aws-deploy:deploy"
         }
       }
     }

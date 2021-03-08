@@ -48,8 +48,8 @@ import { environment as env } from '../environments/environment';
   //audience: 'http://localhost:3001',
 
   // Request this scope at user authentication time
-  //scope: 'update:users',
-  scope: 'read:current_user',
+  scope: 'update:users',
+  //scope: 'read:current_user',
 
   // Specify configuration for the interceptor              
     httpInterceptor: {
@@ -67,10 +67,10 @@ import { environment as env } from '../environments/environment';
         }
       },
       {
-        uri: 'https://dev-t26qk6oz.us.auth0.com/api/v2*',
+        uri: 'https://dev-t26qk6oz.us.auth0.com/api/v2/*',
         tokenOptions: {
         audience:'https://dev-t26qk6oz.us.auth0.com/api/v2/',
-        scope: 'read:current_user',
+        //scope: 'read:current_user',
         }
       },
     ] 
